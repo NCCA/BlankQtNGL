@@ -44,12 +44,12 @@ target_sources(${TargetName} PRIVATE ${PROJECT_SOURCE_DIR}/src/main.cpp
 target_link_libraries(${TargetName} PRIVATE  NGL Qt${QT_VERSION_MAJOR}::Widgets )
 
 
-add_custom_target(${TargetName}CopyShadersAndfonts ALL
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-    ${CMAKE_CURRENT_SOURCE_DIR}/shaders
-    $<TARGET_FILE_DIR:${TargetName}>/shaders
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-    ${CMAKE_CURRENT_SOURCE_DIR}/fonts
-    $<TARGET_FILE_DIR:${TargetName}>/fonts
+# add_custom_target(${TargetName}CopyShadersAndfonts ALL
+#     COMMAND ${CMAKE_COMMAND} -E copy_directory
+#     ${CMAKE_CURRENT_SOURCE_DIR}/shaders
+#     $<TARGET_FILE_DIR:${TargetName}>/shaders
+#     COMMAND ${CMAKE_COMMAND} -E copy_directory
+#     ${CMAKE_CURRENT_SOURCE_DIR}/fonts
+#     $<TARGET_FILE_DIR:${TargetName}>/fonts
 
-) 
+# ) 
