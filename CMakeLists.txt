@@ -23,8 +23,13 @@ set(CMAKE_AUTOUIC_SEARCH_PATHS ${PROJECT_SOURCE_DIR}/ui)
 # run rcc if required
 set(CMAKE_AUTORCC ON)
 # find Qt we can use either Qt6 or Qt5
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+# find Qt we can use either Qt6 or Qt5
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets OpenGLWidgets)
+if (Qt6_FOUND)
+    find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets OpenGLWidgets)
+else()
+    find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+endif()
 
 # use C++ 17
 set(CMAKE_CXX_STANDARD 17)
@@ -41,7 +46,10 @@ target_sources(${TargetName} PRIVATE ${PROJECT_SOURCE_DIR}/src/main.cpp
 			${PROJECT_SOURCE_DIR}/include/NGLScene.h  
 )
 
-target_link_libraries(${TargetName} PRIVATE  NGL Qt${QT_VERSION_MAJOR}::Widgets )
+target_link_libraries(${TargetName} PRIVATE  NGL Qt${QT_VERSION_MAJOR}::Widgets)
+if (Qt6_FOUND)
+    target_link_libraries(${TargetName} PRIVATE Qt${QT_VERSION_MAJOR}::OpenGLWidgets)
+endif()
 
 
 # add_custom_target(${TargetName}CopyShadersAndfonts ALL
